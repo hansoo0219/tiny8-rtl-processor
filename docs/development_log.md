@@ -197,3 +197,46 @@ the datapath is integrated in `tiny8_core`.
 
 Implement and verify `tiny8_core`, including the PC, IR, accumulator, flags,
 output register, ALU operand mux, and memory interfaces.
+
+## 2026-08-17 — Processor core
+
+### Completed
+
+- Implemented `rtl/tiny8_core.v` with the PC, instruction register,
+  accumulator, zero and carry flags, registered output, and registered
+  one-cycle `out_valid` pulse.
+- Connected the existing `alu8` and `control_unit` modules through the immediate
+  and Data RAM operand paths.
+- Implemented the external Program ROM and Data RAM interfaces, including
+  rising-edge `STA` timing and defensive PC-load priority over increment.
+- Added `tb/tiny8_core_tb.v` with asynchronous instruction/data reads and a
+  synchronous external Data RAM write model.
+
+### Verified results
+
+- Icarus Verilog compiled the core hierarchy and testbench without warnings.
+- Self-checking RTL simulation passed 9 groups and 172 checks covering reset,
+  fetch timing, the reference 5 + 3 program, loads/stores, arithmetic and flags,
+  logic, shifts, branches, PC wrap-around, reserved opcode behavior, reset-write
+  protection, output timing, and stable halt behavior.
+- Verilator lint completed without warnings.
+- The VCD waveform confirmed two-cycle instruction sequencing, synchronous
+  Data RAM write timing, branch target loading, the one-cycle output-valid
+  pulse, and stable halt state.
+- Yosys reported zero check problems and retained 33 flip-flops: 31 datapath
+  bits and 2 control-state bits. No latch or internal memory cells were inferred.
+- The synthesized netlist passed the same 9 groups and 172 checks.
+- All ALU, decoder, Data RAM, Program ROM, and control-unit regression
+  simulations continued to pass.
+
+### Important limitation
+
+The core was verified against behavioral external memory models. The real
+`program_rom` and `data_ram` modules have not yet been connected to the core in
+`tiny8_system`, so this result does not yet claim complete processor-system
+integration.
+
+### Next step
+
+Implement `tiny8_system`, connect the verified core and memories, and run the
+complete reference program through the real integrated hierarchy.

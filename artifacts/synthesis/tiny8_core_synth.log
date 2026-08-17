@@ -1,0 +1,1745 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+40 (git sha1 0f2bcb94b-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+
+-- Running command `read_verilog -Irtl rtl/alu8.v rtl/instruction_decoder.v rtl/control_unit.v rtl/tiny8_core.v; hierarchy -check -top tiny8_core; synth -top tiny8_core; check; stat; write_verilog build/tiny8_core_synth.v; write_json build/tiny8_core.json' --
+
+1. Executing Verilog-2005 frontend: rtl/alu8.v
+Parsing Verilog input from `rtl/alu8.v' to AST representation.
+Generating RTLIL representation for module `\alu8'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/instruction_decoder.v
+Parsing Verilog input from `rtl/instruction_decoder.v' to AST representation.
+Generating RTLIL representation for module `\instruction_decoder'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/control_unit.v
+Parsing Verilog input from `rtl/control_unit.v' to AST representation.
+Generating RTLIL representation for module `\control_unit'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/tiny8_core.v
+Parsing Verilog input from `rtl/tiny8_core.v' to AST representation.
+Generating RTLIL representation for module `\tiny8_core'.
+Successfully finished Verilog frontend.
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+
+5.2. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+Removed 0 unused modules.
+
+6. Executing SYNTH pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/tiny8_core.v:88$15 in module tiny8_core.
+Marked 4 switch rules as full_case in process $proc$rtl/control_unit.v:65$10 in module control_unit.
+Marked 1 switch rules as full_case in process $proc$rtl/control_unit.v:57$9 in module control_unit.
+Removed 1 dead cases from process $proc$rtl/instruction_decoder.v:21$8 in module instruction_decoder.
+Marked 1 switch rules as full_case in process $proc$rtl/instruction_decoder.v:21$8 in module instruction_decoder.
+Removed 1 dead cases from process $proc$rtl/alu8.v:14$1 in module alu8.
+Marked 1 switch rules as full_case in process $proc$rtl/alu8.v:14$1 in module alu8.
+Removed a total of 2 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 2 redundant assignments.
+Promoted 25 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 1 switch.
+<suppressed ~14 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+     1/7: $0\out_valid[0:0]
+     2/7: $0\carry_reg[0:0]
+     3/7: $0\zero_reg[0:0]
+     4/7: $0\acc_reg[7:0]
+     5/7: $0\ir_reg[7:0]
+     6/7: $0\pc_reg[3:0]
+     7/7: $0\out_data[7:0]
+Creating decoders for process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+     1/25: $2\out_we[0:0]
+     2/25: $2\data_we[0:0]
+     3/25: $2\c_we[0:0]
+     4/25: $2\z_we[0:0]
+     5/25: $2\acc_we[0:0]
+     6/25: $2\operand_sel[0:0]
+     7/25: $2\alu_op[2:0]
+     8/25: $2\pc_load[0:0]
+     9/25: $2\pc_inc[0:0]
+    10/25: $2\ir_we[0:0]
+    11/25: $4\next_state[1:0]
+    12/25: $3\next_state[1:0]
+    13/25: $2\next_state[1:0]
+    14/25: $1\pc_inc[0:0]
+    15/25: $1\ir_we[0:0]
+    16/25: $1\next_state[1:0]
+    17/25: $1\halted[0:0]
+    18/25: $1\pc_load[0:0]
+    19/25: $1\out_we[0:0]
+    20/25: $1\data_we[0:0]
+    21/25: $1\c_we[0:0]
+    22/25: $1\z_we[0:0]
+    23/25: $1\acc_we[0:0]
+    24/25: $1\operand_sel[0:0]
+    25/25: $1\alu_op[2:0]
+Creating decoders for process `\control_unit.$proc$rtl/control_unit.v:57$9'.
+     1/1: $0\state_reg[1:0]
+Creating decoders for process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+     1/1: { $1\reserved[0:0] $1\halt[0:0] $1\jump_zero[0:0] $1\jump[0:0] $1\out_we[0:0] $1\data_we[0:0] $1\c_we[0:0] $1\z_we[0:0] $1\acc_we[0:0] $1\operand_sel[0:0] $1\alu_op[2:0] }
+Creating decoders for process `\alu8.$proc$rtl/alu8.v:14$1'.
+     1/2: $1\carry_out[0:0]
+     2/2: $1\result[7:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\control_unit.\alu_op' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\operand_sel' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\acc_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\z_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\c_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\data_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\out_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\ir_we' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\pc_inc' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\pc_load' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\halted' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\control_unit.\next_state' from process `\control_unit.$proc$rtl/control_unit.v:65$10'.
+No latch inferred for signal `\instruction_decoder.\alu_op' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\operand_sel' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\acc_we' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\z_we' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\c_we' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\data_we' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\out_we' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\jump' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\jump_zero' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\halt' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\instruction_decoder.\reserved' from process `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+No latch inferred for signal `\alu8.\result' from process `\alu8.$proc$rtl/alu8.v:14$1'.
+No latch inferred for signal `\alu8.\carry_out' from process `\alu8.$proc$rtl/alu8.v:14$1'.
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\tiny8_core.\out_data' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$181' with positive edge clock.
+Creating register for signal `\tiny8_core.\out_valid' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$182' with positive edge clock.
+Creating register for signal `\tiny8_core.\pc_reg' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$183' with positive edge clock.
+Creating register for signal `\tiny8_core.\ir_reg' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$184' with positive edge clock.
+Creating register for signal `\tiny8_core.\acc_reg' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$185' with positive edge clock.
+Creating register for signal `\tiny8_core.\zero_reg' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$186' with positive edge clock.
+Creating register for signal `\tiny8_core.\carry_reg' using process `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+  created $dff cell `$procdff$187' with positive edge clock.
+Creating register for signal `\control_unit.\state_reg' using process `\control_unit.$proc$rtl/control_unit.v:57$9'.
+  created $dff cell `$procdff$188' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+Removing empty process `tiny8_core.$proc$rtl/tiny8_core.v:88$15'.
+Found and cleaned up 4 empty switches in `\control_unit.$proc$rtl/control_unit.v:65$10'.
+Removing empty process `control_unit.$proc$rtl/control_unit.v:65$10'.
+Found and cleaned up 1 empty switch in `\control_unit.$proc$rtl/control_unit.v:57$9'.
+Removing empty process `control_unit.$proc$rtl/control_unit.v:57$9'.
+Found and cleaned up 1 empty switch in `\instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+Removing empty process `instruction_decoder.$proc$rtl/instruction_decoder.v:21$8'.
+Found and cleaned up 1 empty switch in `\alu8.$proc$rtl/alu8.v:14$1'.
+Removing empty process `alu8.$proc$rtl/alu8.v:14$1'.
+Cleaned up 15 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+<suppressed ~2 debug messages>
+Optimizing module control_unit.
+<suppressed ~3 debug messages>
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+<suppressed ~2 debug messages>
+
+6.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 117 unused wires.
+<suppressed ~4 debug messages>
+
+6.5. Executing CHECK pass (checking for obvious problems).
+Checking module tiny8_core...
+Checking module control_unit...
+Checking module instruction_decoder...
+Checking module alu8...
+Found and reported 0 problems.
+
+6.6. Executing OPT pass (performing simple optimizations).
+
+6.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 27 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 48 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Computing hashes of 35 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+<suppressed ~39 debug messages>
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 24 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Computing hashes of 16 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+<suppressed ~24 debug messages>
+Removed a total of 21 cells.
+
+6.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$107.
+    dead port 2/2 on $mux $procmux$100.
+    dead port 1/2 on $mux $procmux$98.
+    dead port 1/2 on $mux $procmux$91.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 4 multiplexer ports.
+<suppressed ~68 debug messages>
+
+6.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+    New ctrl vector for $pmux cell $procmux$163: { $procmux$173_CMP $procmux$174_CMP $auto$opt_reduce.cc:137:opt_pmux$190 $procmux$178_CMP $procmux$179_CMP }
+  Optimizing cells in module \alu8.
+Performed a total of 1 changes.
+
+6.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 27 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 31 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Computing hashes of 30 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Computing hashes of 29 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 17 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 2 cells.
+
+6.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 26 unused wires.
+<suppressed ~2 debug messages>
+
+6.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~61 debug messages>
+
+6.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 27 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 29 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 17 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+6.7. Executing FSM pass (extract and optimize FSM).
+
+6.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking control_unit.state_reg as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+
+6.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+6.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+6.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+6.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 27 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 29 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 17 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~61 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 27 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 29 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 17 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$187 ($dff) from module tiny8_core (D = $procmux$27_Y, Q = \carry_reg, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$191 ($sdff) from module tiny8_core (D = \alu_carry_out, Q = \carry_reg).
+Adding SRST signal on $procdff$181 ($dff) from module tiny8_core (D = $procmux$55_Y, Q = \out_data, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$193 ($sdff) from module tiny8_core (D = \acc_reg, Q = \out_data).
+Adding SRST signal on $procdff$182 ($dff) from module tiny8_core (D = $procmux$22_Y, Q = \out_valid, rval = 1'0).
+Adding SRST signal on $procdff$183 ($dff) from module tiny8_core (D = $procmux$50_Y, Q = \pc_reg, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:337:slice$196 ($sdff) from module tiny8_core (D = $procmux$50_Y, Q = \pc_reg).
+Adding SRST signal on $procdff$184 ($dff) from module tiny8_core (D = $procmux$42_Y, Q = \ir_reg, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$200 ($sdff) from module tiny8_core (D = \instr_rdata, Q = \ir_reg).
+Adding SRST signal on $procdff$185 ($dff) from module tiny8_core (D = $procmux$37_Y, Q = \acc_reg, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$202 ($sdff) from module tiny8_core (D = \alu_result, Q = \acc_reg).
+Adding SRST signal on $procdff$186 ($dff) from module tiny8_core (D = $procmux$32_Y, Q = \zero_reg, rval = 1'1).
+Adding EN signal on $auto$ff.cc:337:slice$204 ($sdff) from module tiny8_core (D = $eq$rtl/tiny8_core.v:115$17_Y, Q = \zero_reg).
+Adding SRST signal on $procdff$188 ($dff) from module control_unit (D = \next_state, Q = \state_reg, rval = 2'00).
+
+6.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 13 unused cells and 13 unused wires.
+<suppressed ~15 debug messages>
+
+6.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+<suppressed ~1 debug messages>
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~43 debug messages>
+
+6.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 16 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 28 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 17 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 3 bits (of 4) from port B of cell tiny8_core.$add$rtl/tiny8_core.v:107$16 ($add).
+Removed top 1 bits (of 2) from port B of cell control_unit.$procmux$158_CMP0 ($eq).
+Removed top 28 address bits (of 32) from memory init port instruction_decoder.$auto$mem.cc:351:emit$21 ($auto$proc_rom.cc:155:do_switch$19).
+Removed top 1 bits (of 9) from port A of cell alu8.$add$rtl/alu8.v:24$2 ($add).
+Removed top 1 bits (of 9) from port B of cell alu8.$add$rtl/alu8.v:24$2 ($add).
+Removed top 1 bits (of 3) from port B of cell alu8.$procmux$177_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell alu8.$procmux$178_CMP0 ($eq).
+Removed top 2 bits (of 3) from port B of cell alu8.$procmux$179_CMP0 ($eq).
+
+6.10. Executing PEEPOPT pass (run peephole optimizers).
+
+6.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module tiny8_core:
+  creating $macc model for $add$rtl/tiny8_core.v:107$16 ($add).
+  creating $alu model for $macc $add$rtl/tiny8_core.v:107$16.
+  creating $alu cell for $add$rtl/tiny8_core.v:107$16: $auto$alumacc.cc:548:replace_alu$207
+  created 1 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module control_unit:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module instruction_decoder:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module alu8:
+  creating $macc model for $sub$rtl/alu8.v:28$3 ($sub).
+  creating $macc model for $add$rtl/alu8.v:24$2 ($add).
+  creating $alu model for $macc $add$rtl/alu8.v:24$2.
+  creating $alu model for $macc $sub$rtl/alu8.v:28$3.
+  creating $alu model for $ge$rtl/alu8.v:29$4 ($ge): merged with $sub$rtl/alu8.v:28$3.
+  creating $alu cell for $sub$rtl/alu8.v:28$3, $ge$rtl/alu8.v:29$4: $auto$alumacc.cc:548:replace_alu$210
+  creating $alu cell for $add$rtl/alu8.v:24$2: $auto$alumacc.cc:548:replace_alu$223
+  created 2 $alu and 0 $macc cells.
+
+6.13. Executing SHARE pass (SAT-based resource sharing).
+
+6.14. Executing OPT pass (performing simple optimizations).
+
+6.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 16 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 28 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~43 debug messages>
+
+6.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 16 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 28 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+6.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~43 debug messages>
+
+6.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 16 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 28 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 2 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+6.15. Executing MEMORY pass.
+
+6.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+6.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+6.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+6.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+6.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `$auto$proc_rom.cc:155:do_switch$19'[0] in module `\instruction_decoder': no output FF found.
+Checking read port address `$auto$proc_rom.cc:155:do_switch$19'[0] in module `\instruction_decoder': no address FF found.
+
+6.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+6.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+6.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.17. Executing OPT pass (performing simple optimizations).
+
+6.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+<suppressed ~2 debug messages>
+Optimizing module control_unit.
+<suppressed ~9 debug messages>
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+<suppressed ~2 debug messages>
+
+6.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 14 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 26 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 1 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~2 debug messages>
+
+6.17.5. Finished fast OPT passes.
+
+6.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory $auto$proc_rom.cc:155:do_switch$19 in module \instruction_decoder:
+  created 16 $dff cells and 0 static cells of width 13.
+  read interface: 0 $dff and 15 $mux cells.
+  write interface: 0 write mux blocks.
+
+6.19. Executing OPT pass (performing simple optimizations).
+
+6.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 14 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 26 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 15 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~46 debug messages>
+
+6.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+    Consolidated identical input bits for $mux cell $procmux$105:
+      Old ports: A=2'00, B=2'10, Y=$2\next_state[1:0]
+      New ports: A=1'0, B=1'1, Y=$2\next_state[1:0] [1]
+      New connections: $2\next_state[1:0] [0] = 1'0
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][6]$267:
+      Old ports: A=13'0000001110110, B=13'0000001110111, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$a$247
+      New ports: A=1'0, B=1'1, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$a$247 [0]
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$a$247 [12:1] = 12'000000111011
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][5]$264:
+      Old ports: A=13'0010000000000, B=13'0000100000000, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245
+      New ports: A=2'10, B=2'01, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [10] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [8] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [12:11] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [9] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [7:0] } = 11'00000000000
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][4]$261:
+      Old ports: A=13'0000000111101, B=13'0001000000000, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244
+      New ports: A=2'01, B=2'10, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [9] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [12:10] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [8:1] } = { 6'000000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] 1'0 }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][3]$258:
+      Old ports: A=13'0000000111011, B=13'0000000111100, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242
+      New ports: A=2'01, B=2'10, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [2] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [0] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [12:3] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [1] } = { 10'0000000111 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [0] }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][2]$255:
+      Old ports: A=13'0000001111001, B=13'0000001111010, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$a$241
+      New ports: A=2'01, B=2'10, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$a$241 [1:0]
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$a$241 [12:2] = 11'00000011110
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][1]$252:
+      Old ports: A=13'0000000111000, B=13'0000010000000, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239
+      New ports: A=2'01, B=2'10, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [12:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [6:4] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [2:0] } = { 6'000000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] 3'000 }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][0]$249:
+      Old ports: A=13'0000000000000, B=13'0000000110000, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238
+      New ports: A=1'0, B=1'1, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238 [4]
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238 [12:5] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238 [3:0] } = { 7'0000000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238 [4] 4'0000 }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][3][7]$270:
+      Old ports: A=13'1000000000000, B=13'0100000000000, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$b$248
+      New ports: A=2'10, B=2'01, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$b$248 [12:11]
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$b$248 [10:0] = 11'00000000000
+  Optimizing cells in module \instruction_decoder.
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$246:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$a$247, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$b$248, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236
+      New ports: A={ 3'001 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$a$247 [0] }, B={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][3]$b$248 [12:11] 2'00 }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [12:11] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1:0] }
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [10:2] = { 4'0000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1] }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$243:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235
+      New ports: A={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [9] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$a$244 [0] }, B={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [10] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][2]$b$245 [8] 1'0 }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [10:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [12:11] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [7:1] } = { 4'0000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] 1'0 }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$240:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$a$241, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233
+      New ports: A={ 2'10 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$a$241 [1:0] }, B={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [2] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$b$242 [0] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [6] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [2:0] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [12:7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [5:3] } = 9'000000111
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$237:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232
+      New ports: A={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$a$238 [4] 1'0 }, B={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [4:3] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [12:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [6:5] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [2:0] } = { 6'000000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [4] 3'000 }
+  Optimizing cells in module \instruction_decoder.
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$234:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230
+      New ports: A={ 2'00 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [10:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$a$235 [0] }, B={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [12:11] 4'0000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][1]$b$236 [1:0] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [12:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [3:0] }
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [7:4] = { 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [1] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [2] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [2] }
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$231:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233, Y=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229
+      New ports: A={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [7] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$a$232 [4:3] 3'000 }, B={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [6] 2'11 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [2:0] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [7:6] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [4:0] }
+      New connections: { $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [12:8] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [5] } = { 5'00000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [4] }
+  Optimizing cells in module \instruction_decoder.
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$228:
+      Old ports: A=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229, B=$memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230, Y={ \reserved \halt \jump_zero \jump \out_we \data_we \c_we \z_we \acc_we \operand_sel \alu_op }
+      New ports: A={ 5'00000 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [7:6] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$a$229 [4:0] }, B={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [12:8] 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [1] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [2] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][0][0]$b$230 [3:0] }, Y={ \reserved \halt \jump_zero \jump \out_we \data_we \c_we \acc_we \operand_sel \alu_op }
+      New connections: \z_we = \acc_we
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 16 changes.
+
+6.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 14 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 26 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 15 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Computing hashes of 10 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+<suppressed ~15 debug messages>
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 5 cells.
+
+6.19.6. Executing OPT_SHARE pass.
+
+6.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 21 unused wires.
+<suppressed ~1 debug messages>
+
+6.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+<suppressed ~1 debug messages>
+Optimizing module instruction_decoder.
+<suppressed ~1 debug messages>
+Optimizing module alu8.
+
+6.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~47 debug messages>
+
+6.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+    Consolidated identical input bits for $mux cell $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][1]$240:
+      Old ports: A={ 2'10 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] }, B={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [6] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [2:0] }
+      New ports: A={ 2'10 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] }, B={ 1'0 $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [7] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3] }, Y={ $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [6] $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [2:1] }
+      New connections: $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][1][0]$b$233 [0] = $memory$auto$proc_rom.cc:155:do_switch$19$rdmux[0][2][0]$b$239 [3]
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 1 changes.
+
+6.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 14 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 25 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 9 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.19.14. Executing OPT_SHARE pass.
+
+6.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+
+6.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tiny8_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \control_unit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \instruction_decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \alu8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~46 debug messages>
+
+6.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tiny8_core.
+  Optimizing cells in module \control_unit.
+  Optimizing cells in module \instruction_decoder.
+  Optimizing cells in module \alu8.
+Performed a total of 0 changes.
+
+6.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 14 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 25 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 9 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 21 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.19.22. Executing OPT_SHARE pass.
+
+6.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+
+6.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.19.26. Finished fast OPT passes. (There is nothing left to do.)
+
+6.20. Executing TECHMAP pass (map to technology primitives).
+
+6.20.1. Executing Verilog-2005 frontend: /opt/oss-cad-suite/lib/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+6.20.2. Continuing TECHMAP pass.
+Using template $paramod$4ccbe221165818e15f326ddee3d1183c7924e12f\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $sdff.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~680 debug messages>
+
+6.21. Executing OPT pass (performing simple optimizations).
+
+6.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+<suppressed ~33 debug messages>
+Optimizing module control_unit.
+<suppressed ~15 debug messages>
+Optimizing module instruction_decoder.
+<suppressed ~2 debug messages>
+Optimizing module alu8.
+<suppressed ~108 debug messages>
+
+6.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 66 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Computing hashes of 65 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\control_unit'.
+Computing hashes of 40 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 44 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Computing hashes of 36 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Computing hashes of 32 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+<suppressed ~36 debug messages>
+Finding identical cells in module `\alu8'.
+Computing hashes of 313 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Computing hashes of 275 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Computing hashes of 271 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+<suppressed ~126 debug messages>
+Removed a total of 55 cells.
+
+6.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:337:slice$1038 ($_SDFF_PP0_) from module control_unit (D = $auto$simplemap.cc:189:logic_reduce$1075, Q = \state_reg [1], rval = 1'0).
+Adding SRST signal on $auto$ff.cc:337:slice$1037 ($_SDFF_PP0_) from module control_unit (D = $auto$simplemap.cc:189:logic_reduce$1064, Q = \state_reg [0], rval = 1'0).
+
+6.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 7 unused cells and 187 unused wires.
+<suppressed ~12 debug messages>
+
+6.21.5. Rerunning OPT passes. (Removed registers in this run.)
+
+6.21.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+<suppressed ~1 debug messages>
+Optimizing module alu8.
+
+6.21.7. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 60 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 42 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Computing hashes of 41 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Computing hashes of 40 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 31 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 271 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 2 cells.
+
+6.21.8. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.21.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.21.10. Finished fast OPT passes.
+
+6.22. Executing ABC pass (technology mapping using ABC).
+
+6.22.1. Extracting gate netlist of module `\tiny8_core' to `<abc-temp-dir>/input.blif'..
+
+6.22.1.1. Executed ABC.
+Extracted 27 gates and 55 wires to a netlist network with 27 inputs and 14 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug  8 2026 02:32:38)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+6.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        8
+ABC RESULTS:               MUX cells:        8
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        4
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        2
+ABC RESULTS:        internal signals:       14
+ABC RESULTS:           input signals:       27
+ABC RESULTS:          output signals:       14
+Removing temp directory.
+
+6.22.2. Extracting gate netlist of module `\control_unit' to `<abc-temp-dir>/input.blif'..
+
+6.22.2.1. Executed ABC.
+Extracted 37 gates and 54 wires to a netlist network with 16 inputs and 15 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug  8 2026 02:32:38)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+6.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       13
+ABC RESULTS:            ANDNOT cells:        4
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:                OR cells:        3
+ABC RESULTS:        internal signals:       23
+ABC RESULTS:           input signals:       16
+ABC RESULTS:          output signals:       15
+Removing temp directory.
+
+6.22.3. Extracting gate netlist of module `\instruction_decoder' to `<abc-temp-dir>/input.blif'..
+
+6.22.3.1. Executed ABC.
+Extracted 31 gates and 37 wires to a netlist network with 4 inputs and 12 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug  8 2026 02:32:38)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+6.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       10
+ABC RESULTS:            ANDNOT cells:        7
+ABC RESULTS:              NAND cells:        7
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:                OR cells:        4
+ABC RESULTS:             ORNOT cells:        3
+ABC RESULTS:        internal signals:       21
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:       12
+Removing temp directory.
+
+6.22.4. Extracting gate netlist of module `\alu8' to `<abc-temp-dir>/input.blif'..
+
+6.22.4.1. Executed ABC.
+Extracted 271 gates and 290 wires to a netlist network with 19 inputs and 9 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug  8 2026 02:32:38)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+6.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       61
+ABC RESULTS:            ANDNOT cells:       13
+ABC RESULTS:              NAND cells:       89
+ABC RESULTS:               NOR cells:        8
+ABC RESULTS:                OR cells:       15
+ABC RESULTS:             ORNOT cells:       15
+ABC RESULTS:              XNOR cells:        2
+ABC RESULTS:               XOR cells:        8
+ABC RESULTS:        internal signals:      262
+ABC RESULTS:           input signals:       19
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+Removing global temp directory.
+
+6.23. Executing OPT pass (performing simple optimizations).
+
+6.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tiny8_core.
+Optimizing module control_unit.
+Optimizing module instruction_decoder.
+Optimizing module alu8.
+
+6.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tiny8_core'.
+Computing hashes of 59 cells of `\tiny8_core'.
+Finding duplicate cells in `\tiny8_core'.
+Finding identical cells in module `\control_unit'.
+Computing hashes of 24 cells of `\control_unit'.
+Finding duplicate cells in `\control_unit'.
+Finding identical cells in module `\instruction_decoder'.
+Computing hashes of 33 cells of `\instruction_decoder'.
+Finding duplicate cells in `\instruction_decoder'.
+Finding identical cells in module `\alu8'.
+Computing hashes of 211 cells of `\alu8'.
+Finding duplicate cells in `\alu8'.
+Removed a total of 0 cells.
+
+6.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tiny8_core..
+Finding unused cells or wires in module \control_unit..
+Finding unused cells or wires in module \instruction_decoder..
+Finding unused cells or wires in module \alu8..
+Removed 0 unused cells and 305 unused wires.
+<suppressed ~4 debug messages>
+
+6.23.5. Finished fast OPT passes.
+
+6.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `tiny8_core'. Setting top module to tiny8_core.
+
+6.24.1. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+
+6.24.2. Analyzing design hierarchy..
+Top module:  \tiny8_core
+Used module:     \alu8
+Used module:     \control_unit
+Used module:         \instruction_decoder
+Removed 0 unused modules.
+
+6.25. Printing statistics.
+
+=== tiny8_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       53 wires
+      145 wire bits
+       35 public wires
+      127 public wire bits
+       17 ports
+       69 port bits
+       57 cells
+        8   $_AND_
+        8   $_MUX_
+        1   $_NAND_
+        4   $_NOR_
+        1   $_NOT_
+        1   $_OR_
+       29   $_SDFFE_PP0P_
+        1   $_SDFFE_PP1P_
+        1   $_SDFF_PP0_
+        1   $_XNOR_
+        2   $_XOR_
+        2 submodules
+        1   alu8
+        1   control_unit
+
+=== control_unit ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       37 wires
+       46 wire bits
+       28 public wires
+       37 public wire bits
+       16 ports
+       22 port bits
+       23 cells
+        4   $_ANDNOT_
+       13   $_AND_
+        1   $_NOR_
+        3   $_OR_
+        2   $_SDFF_PP0_
+        1 submodules
+        1   instruction_decoder
+
+=== instruction_decoder ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       33 wires
+       38 wire bits
+       12 public wires
+       17 public wire bits
+       12 ports
+       17 port bits
+       33 cells
+        7   $_ANDNOT_
+       10   $_AND_
+        7   $_NAND_
+        2   $_NOR_
+        3   $_ORNOT_
+        4   $_OR_
+
+=== alu8 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      207 wires
+      230 wire bits
+        5 public wires
+       28 public wire bits
+        5 ports
+       28 port bits
+      211 cells
+       13   $_ANDNOT_
+       61   $_AND_
+       89   $_NAND_
+        8   $_NOR_
+       15   $_ORNOT_
+       15   $_OR_
+        2   $_XNOR_
+        8   $_XOR_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      324 tiny8_core
+      211 alu8
+       23 control_unit
+       33   instruction_decoder
+
+        +----------Count including submodules.
+        | 
+      330 wires
+      459 wire bits
+       80 public wires
+      209 public wire bits
+       50 ports
+      136 port bits
+        - memories
+        - memory bits
+        - processes
+      324 cells
+       24   $_ANDNOT_
+       92   $_AND_
+        8   $_MUX_
+       97   $_NAND_
+       15   $_NOR_
+        1   $_NOT_
+       18   $_ORNOT_
+       23   $_OR_
+       29   $_SDFFE_PP0P_
+        1   $_SDFFE_PP1P_
+        3   $_SDFF_PP0_
+        3   $_XNOR_
+       10   $_XOR_
+        2 submodules
+        1   alu8
+        1   control_unit
+
+6.26. Executing CHECK pass (checking for obvious problems).
+Checking module tiny8_core...
+Checking module control_unit...
+Checking module instruction_decoder...
+Checking module alu8...
+Found and reported 0 problems.
+
+7. Executing CHECK pass (checking for obvious problems).
+Checking module tiny8_core...
+Checking module control_unit...
+Checking module instruction_decoder...
+Checking module alu8...
+Found and reported 0 problems.
+
+8. Printing statistics.
+
+=== tiny8_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       53 wires
+      145 wire bits
+       35 public wires
+      127 public wire bits
+       17 ports
+       69 port bits
+       57 cells
+        8   $_AND_
+        8   $_MUX_
+        1   $_NAND_
+        4   $_NOR_
+        1   $_NOT_
+        1   $_OR_
+       29   $_SDFFE_PP0P_
+        1   $_SDFFE_PP1P_
+        1   $_SDFF_PP0_
+        1   $_XNOR_
+        2   $_XOR_
+        2 submodules
+        1   alu8
+        1   control_unit
+
+=== control_unit ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       37 wires
+       46 wire bits
+       28 public wires
+       37 public wire bits
+       16 ports
+       22 port bits
+       23 cells
+        4   $_ANDNOT_
+       13   $_AND_
+        1   $_NOR_
+        3   $_OR_
+        2   $_SDFF_PP0_
+        1 submodules
+        1   instruction_decoder
+
+=== instruction_decoder ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       33 wires
+       38 wire bits
+       12 public wires
+       17 public wire bits
+       12 ports
+       17 port bits
+       33 cells
+        7   $_ANDNOT_
+       10   $_AND_
+        7   $_NAND_
+        2   $_NOR_
+        3   $_ORNOT_
+        4   $_OR_
+
+=== alu8 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      207 wires
+      230 wire bits
+        5 public wires
+       28 public wire bits
+        5 ports
+       28 port bits
+      211 cells
+       13   $_ANDNOT_
+       61   $_AND_
+       89   $_NAND_
+        8   $_NOR_
+       15   $_ORNOT_
+       15   $_OR_
+        2   $_XNOR_
+        8   $_XOR_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      324 tiny8_core
+      211 alu8
+       23 control_unit
+       33   instruction_decoder
+
+        +----------Count including submodules.
+        | 
+      330 wires
+      459 wire bits
+       80 public wires
+      209 public wire bits
+       50 ports
+      136 port bits
+        - memories
+        - memory bits
+        - processes
+      324 cells
+       24   $_ANDNOT_
+       92   $_AND_
+        8   $_MUX_
+       97   $_NAND_
+       15   $_NOR_
+        1   $_NOT_
+       18   $_ORNOT_
+       23   $_OR_
+       29   $_SDFFE_PP0P_
+        1   $_SDFFE_PP1P_
+        3   $_SDFF_PP0_
+        3   $_XNOR_
+       10   $_XOR_
+        2 submodules
+        1   alu8
+        1   control_unit
+
+9. Executing Verilog backend.
+
+9.1. Executing BMUXMAP pass.
+
+9.2. Executing DEMUXMAP pass.
+Dumping module `\alu8'.
+Dumping module `\control_unit'.
+Dumping module `\instruction_decoder'.
+Dumping module `\tiny8_core'.
+
+10. Executing JSON backend.
+
+End of script. Logfile hash: 28721ca5b2, time: 0.74s, user: 0.11s, system: 0.04s, MEM: 23.20 MB peak
+Yosys 0.68+40 (git sha1 0f2bcb94b-dirty, Release, Clang /usr/bin/clang++ 21.1.8)
+Time spent: 67% 1x abc (0 sec), 6% 22x opt_clean (0 sec), ...
