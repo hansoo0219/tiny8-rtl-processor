@@ -1,9 +1,10 @@
 # Tiny8 Verification Plan
 
-**Status:** In progress. The `alu8`, `instruction_decoder`, `data_ram`,
-`program_rom`, `control_unit`, and `tiny8_core` modules completed the required
-simulation, lint, waveform, and synthesis checks on 2026-08-17. The complete
-`tiny8_system` integration and system-level program checks are still planned.
+**Status:** In progress. Every planned RTL module, including `tiny8_system`,
+completed simulation, lint, waveform, and synthesis checks on 2026-08-17. The
+real-memory reference 5 + 3 program also passed RTL and synthesized-netlist
+simulation. The additional complete-program matrix and retained annotated
+waveform screenshot are still planned.
 
 ## 1. Required quality gates
 

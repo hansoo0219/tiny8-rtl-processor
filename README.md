@@ -8,11 +8,12 @@ branching, flags, output, verification, linting, and synthesis.
 ## Current status
 
 The RAM-based architecture and instruction set are frozen as the implementation
-baseline. The `alu8`, `instruction_decoder`, `data_ram`, `program_rom`,
-`control_unit`, and `tiny8_core` modules have been implemented and verified with
-self-checking simulation, lint, waveform review, and logic synthesis. The
-`tiny8_system` memory integration has not been implemented, so no complete
-system-level result is claimed yet.
+baseline. All planned RTL modules, including `tiny8_system`, have been
+implemented and verified with self-checking simulation, lint, waveform review,
+and logic synthesis. The integrated real ROM/RAM hierarchy executes the
+reference 5 + 3 program, produces `8'h08`, and enters `HALT`. The additional
+complete-program regression images and final annotated waveform artifact are
+still pending.
 
 ## Baseline architecture
 

@@ -261,6 +261,8 @@ It forwards `PROGRAM_FILE` to `program_rom` and contains no instruction logic.
 - Supporting a synchronous-read block RAM would require an extra memory/wait
   state and is deliberately outside this baseline.
 
-These consequences will be checked against the actual Yosys report after RTL
-implementation. They are expectations, not yet verified results.
-
+The generic Yosys flow confirmed these structural consequences for the complete
+baseline hierarchy. The Data RAM expanded to flip-flops and selection logic,
+while the Program ROM became combinational constant logic. Mapping to a
+technology-specific memory primitive remains target-dependent and is not
+claimed.

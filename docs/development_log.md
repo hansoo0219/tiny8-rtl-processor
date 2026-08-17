@@ -240,3 +240,47 @@ integration.
 
 Implement `tiny8_system`, connect the verified core and memories, and run the
 complete reference program through the real integrated hierarchy.
+
+## 2026-08-17 — Integrated processor system
+
+### Completed
+
+- Implemented `rtl/tiny8_system.v` as the stateless top-level connection of
+  `tiny8_core`, `program_rom`, and `data_ram`.
+- Forwarded the `PROGRAM_FILE` parameter to the Program ROM without adding any
+  extra instruction, memory, or control logic.
+- Added `tb/tiny8_system_tb.v` to run the real `programs/add_5_3.hex` image
+  through the real ROM and RAM hierarchy.
+- Checked the exact fetch/execute sequence, both synchronous RAM stores and
+  asynchronous reads, output timing, halt stability, reset recovery, RAM
+  retention across reset, and program restart.
+
+### Verified results
+
+- Icarus Verilog compiled the complete hierarchy and testbench without warnings.
+- Self-checking RTL simulation passed 4 groups and 80 checks. The integrated
+  program produced `out_data = 8'h08`, pulsed `out_valid` for one cycle, and
+  halted with `PC = 4'h8`.
+- Verilator lint completed without warnings across the complete RTL hierarchy.
+- The VCD waveform confirmed real ROM fetches, RAM writes at the two `STA`
+  execute edges, RAM read data for `LDA` and `ADD`, output timing, halt
+  stability, and synchronous reset recovery.
+- Yosys reported zero check problems. Generic synthesis produced 772 cells and
+  retained 161 storage bits: 33 core/control flip-flops and 128 Data RAM bits.
+  The Program ROM remained combinational, and no latch cells were inferred.
+- The synthesized complete-system netlist passed the same 4 groups and 80
+  checks.
+- Every lower-level module and core regression simulation continued to pass.
+
+### Important limitation
+
+Only the reference 5 + 3 image has completed real-memory system-level
+simulation and netlist regression. The verification plan still requires
+separate complete programs for the remaining flag, logic, shift, branch,
+wrap-around, output, and halt scenarios, plus a retained annotated waveform
+screenshot.
+
+### Next step
+
+Add the remaining 16-byte program images and a repeatable parameterized system
+regression runner, then retain the required annotated integration waveform.
