@@ -1,15 +1,25 @@
-# AI Usage
+# AI Assistance Disclosure
 
-AI tools are used for conceptual guidance, architecture review, debugging
-support, and generation of alternative RTL candidates. The specification,
-module behavior, integration choices, test expectations, simulation results,
-synthesis results, and final documentation must be understood and reviewed by
-the project author.
+Tiny8 was developed with substantial assistance from OpenAI Codex/ChatGPT. The
+assistant drafted significant portions of the Verilog RTL, self-checking
+testbenches, program images, build automation, and project documentation. It
+also suggested architecture and debugging approaches, interpreted simulation,
+lint, waveform, and synthesis output, and helped organize local Git commits.
+Development proceeded incrementally, one module at a time; this describes the
+workflow and does not imply that the final source was independently handwritten
+by the human author.
 
-No AI response is treated as verification. Only reproducible compiler, linter,
-self-checking simulation, waveform, and synthesis results are reported as
-verified.
+The human project author chose or approved the project scope and design
+decisions, directed the order of work, ran some local checks, inspected
+waveforms, and asked questions to understand the resulting hardware behavior.
+The human author is responsible for the final submission, for complying with
+any applicable AI-use policy, and for being able to explain, reproduce, and
+modify the submitted design. Any part not personally reviewed or understood
+should not be represented as such.
 
-The processor will be implemented one module at a time. Whole-CPU code
-generation is intentionally excluded from the workflow.
-
+AI responses were not treated as verification. Reported results come from
+reproducible Icarus Verilog simulations and self-checking testbenches, Verilator
+lint, Yosys synthesis checks, and manual GTKWave inspection. These checks show
+that the checked-in design passed the documented cases in the stated
+environment; they are not formal proof, hardware validation, an ASIC tapeout,
+or professional semiconductor experience.

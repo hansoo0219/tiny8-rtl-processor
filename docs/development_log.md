@@ -1,5 +1,9 @@
 # Development Log
 
+This log records artifacts, decisions, and reproducible tool results. It does
+not claim that the source was handwritten without assistance; AI contributions
+are disclosed in `docs/ai_usage.md`.
+
 ## 2026-08-14 — Architecture baseline
 
 ### Completed
