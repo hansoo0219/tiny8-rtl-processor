@@ -113,3 +113,45 @@ flip-flops depending on the eventual target technology.
 
 Implement and verify the 16 x 8-bit Program ROM and its hexadecimal program
 image loading behavior.
+
+## 2026-08-17 — Program ROM
+
+### Completed
+
+- Implemented `rtl/program_rom.v` as a 16 x 8-bit ROM with combinational read
+  behavior and hexadecimal image loading through `$readmemh`.
+- Added the complete 16-byte `programs/add_5_3.hex` reference image. The first
+  seven bytes implement the 5 + 3 example, and every unused location contains
+  the deterministic `HLT` instruction `F0`.
+- Added `tb/program_rom_tb.v` to check every ROM address against an independent
+  expected-value table.
+
+### Verified results
+
+- Icarus Verilog compiled the RTL ROM and testbench without warnings.
+- Self-checking RTL simulation passed 2 test groups covering all 16 addresses.
+- Verilator lint completed without warnings.
+- The VCD waveform confirmed immediate address-dependent reads and the expected
+  program bytes at addresses `0` through `F`.
+- Yosys synthesized the ROM, reported zero check problems, and produced 13
+  combinational logic cells with no latch or flip-flop cells.
+- The synthesized netlist passed the same 16-address self-checking testbench.
+
+### Synthesis note
+
+An earlier implementation filled the array with `F0` in a procedural loop
+before calling `$readmemh`. In the current generic Yosys flow that combination
+collapsed the synthesized ROM to a constant `F0`, despite correct RTL
+simulation. The prefill loop was removed and the program-image contract now
+requires exactly 16 explicit bytes, including `F0` in every unused location.
+
+### Important limitation
+
+The generic synthesis result embeds the current default image as combinational
+logic. A different program image requires resynthesis, and mapping to a
+technology-specific ROM primitive is not claimed.
+
+### Next step
+
+Implement and verify the `FETCH`, `EXECUTE`, and `HALT` sequencing in
+`control_unit`.
