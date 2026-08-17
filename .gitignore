@@ -1,0 +1,9 @@
+/build/
+*.vvp
+*.vcd
+*.fst
+*.lxt
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
