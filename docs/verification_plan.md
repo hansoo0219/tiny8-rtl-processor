@@ -1,10 +1,10 @@
 # Tiny8 Verification Plan
 
-**Status:** In progress. Every planned RTL module, including `tiny8_system`,
-completed simulation, lint, waveform, and synthesis checks on 2026-08-17. The
-real-memory reference 5 + 3 program also passed RTL and synthesized-netlist
-simulation. The additional complete-program matrix and retained annotated
-waveform screenshot are still planned.
+**Status:** Completed on 2026-08-17. Every planned RTL module, including
+`tiny8_system`, completed simulation, lint, waveform, and synthesis checks. The
+real-memory reference 5 + 3 program passed RTL and synthesized-netlist
+simulation, and the eight-image complete-program regression passed with clean
+Verilator lint.
 
 ## 1. Required quality gates
 
@@ -103,6 +103,24 @@ At minimum, separate program images will verify:
 The first reference program is the 5 + 3 example in
 `docs/instruction_set.md`, with expected output `8'h08`.
 
+### Completed regression results
+
+| Program image | Result | Cycles to `HALT` |
+|---|---|---:|
+| `add_5_3.hex` | PASS | 16 |
+| `add_carry_zero.hex` | PASS | 22 |
+| `sub_flags.hex` | PASS | 22 |
+| `logic_ops.hex` | PASS | 20 |
+| `shift_flags.hex` | PASS | 28 |
+| `jz_paths.hex` | PASS | 16 |
+| `jmp_wrap.hex` | PASS | 14 |
+| `out_halt.hex` | PASS | 6 |
+
+All eight images reached the expected `HALT` state with the expected output
+sequence, final PC, accumulator, zero flag, and carry flag. Zero and carry were
+also checked at every output pulse so intermediate SUB and shift flag results
+cannot be hidden by later instructions.
+
 ## 5. Self-checking result policy
 
 Testbenches must compare expected and actual values automatically. A waveform
@@ -130,7 +148,13 @@ The integration waveform must include:
 - Data RAM address, write data, read data, and write enable
 - `out_data`, `out_valid`, `halted`
 
-At least one annotated screenshot will be retained in `artifacts/screenshots/`.
+The retained
+[integration waveform](../artifacts/screenshots/tiny8_system_waveform.png)
+shows alternating `FETCH`/`EXECUTE` phases, `STA` writes of `05` and `03` at
+markers A and B, the `OUT` commit of `08` at marker C, and entry into stable
+`HALT` at marker D. The red primary marker immediately after C confirms
+`out_valid = 1` with `out_data = 08`. The matching GTKWave save configuration
+is retained at `artifacts/waveforms/tiny8_system.gtkw`.
 
 ## 7. Synthesis checklist
 

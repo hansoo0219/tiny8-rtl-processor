@@ -11,9 +11,13 @@ The RAM-based architecture and instruction set are frozen as the implementation
 baseline. All planned RTL modules, including `tiny8_system`, have been
 implemented and verified with self-checking simulation, lint, waveform review,
 and logic synthesis. The integrated real ROM/RAM hierarchy executes the
-reference 5 + 3 program, produces `8'h08`, and enters `HALT`. The additional
-complete-program regression images and final annotated waveform artifact are
-still pending.
+reference 5 + 3 program, produces `8'h08`, and enters `HALT`. An eight-image
+complete-program regression also passes the planned arithmetic, flag, logic,
+shift, branch, PC wrap-around, output, and halt scenarios.
+
+The retained [integration waveform](artifacts/screenshots/tiny8_system_waveform.png)
+shows alternating `FETCH`/`EXECUTE` phases, both `STA` writes, the one-cycle
+`OUT` pulse, and stable entry into `HALT`.
 
 ## Baseline architecture
 

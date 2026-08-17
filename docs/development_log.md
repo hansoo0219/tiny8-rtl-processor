@@ -284,3 +284,40 @@ screenshot.
 
 Add the remaining 16-byte program images and a repeatable parameterized system
 regression runner, then retain the required annotated integration waveform.
+
+## 2026-08-17 — Complete program regression
+
+### Completed
+
+- Added seven complete 16-byte program images alongside the existing 5 + 3
+  reference image.
+- Added a parameterized self-checking system regression that runs all eight
+  images through separate real `tiny8_system` instances.
+- Covered RAM-based arithmetic, ADD carry and zero, SUB borrow and no-borrow,
+  logic, shifts, taken and not-taken branches, PC wrap-around, output timing,
+  and halt behavior.
+- Retained the annotated integration waveform at
+  `artifacts/screenshots/tiny8_system_waveform.png` and its GTKWave save
+  configuration at `artifacts/waveforms/tiny8_system.gtkw`.
+
+### Verified results
+
+- Icarus Verilog reported PASS for `ADD_5_3` in 16 cycles,
+  `ADD_CARRY_ZERO` in 22 cycles, `SUB_FLAGS` in 22 cycles, `LOGIC_OPS` in 20
+  cycles, `SHIFT_FLAGS` in 28 cycles, `JZ_PATHS` in 16 cycles, `JMP_WRAP` in
+  14 cycles, and `OUT_HALT` in 6 cycles.
+- All eight programs reached `HALT` with the expected output sequence, final
+  PC, accumulator, zero flag, and carry flag. Each output pulse also matched
+  its expected zero and carry values, including SUB no-borrow and shift-out
+  carry cases that do not remain asserted at final `HALT`.
+- Verilator lint completed without warnings across the complete RTL and
+  program-regression hierarchy.
+- The retained waveform shows the alternating `FETCH`/`EXECUTE` sequence, the
+  two `STA` writes, the one-cycle `OUT` pulse carrying `08`, and stable entry
+  into `HALT`.
+
+### Synthesis scope
+
+The default integrated netlist still embeds `add_5_3.hex`. Alternate program
+images exercise the same processor and memory interfaces in RTL simulation;
+changing the synthesized Program ROM contents requires resynthesis.

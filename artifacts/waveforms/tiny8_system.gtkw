@@ -1,0 +1,41 @@
+[*]
+[*] tiny8_system reference-program integration waveform
+[*]
+[dumpfile] "build/tiny8_system_tb.vcd"
+[savefile] "artifacts/waveforms/tiny8_system.gtkw"
+[timestart] 0
+[size] 1800 950
+[pos] -1 -1
+*-15.093319 146000 35000 75000 145000 165000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[markername] ARAM[0] write: 05
+[markername] BRAM[1] write: 03
+[markername] COUT commit: 08
+[markername] DEnter HALT
+[sst_width] 297
+[signals_width] 190
+[sst_expanded] 1
+[sst_vpaned_height] 180
+@28
+tiny8_system_tb.clk
+tiny8_system_tb.reset
+@22
+tiny8_system_tb.dbg_state[1:0]
+tiny8_system_tb.dbg_pc[3:0]
+tiny8_system_tb.dbg_ir[7:0]
+tiny8_system_tb.dbg_acc[7:0]
+@28
+tiny8_system_tb.dbg_zero
+tiny8_system_tb.dbg_carry
+@22
+tiny8_system_tb.dut.data_addr[3:0]
+tiny8_system_tb.dut.data_wdata[7:0]
+tiny8_system_tb.dut.data_rdata[7:0]
+@28
+tiny8_system_tb.dut.data_we
+@22
+tiny8_system_tb.out_data[7:0]
+@28
+tiny8_system_tb.out_valid
+tiny8_system_tb.halted
+[pattern_trace] 1
+[pattern_trace] 0
