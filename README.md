@@ -8,7 +8,7 @@ branching, flags, output, verification, linting, and synthesis.
 ## Current status
 
 The RAM-based architecture and instruction set are frozen as the implementation
-baseline. The combinational `alu8` and `instruction_decoder` modules have been
+baseline. The `alu8`, `instruction_decoder`, and `data_ram` modules have been
 implemented and verified with self-checking simulation, lint, waveform review,
 and logic synthesis. The remaining processor modules have not been implemented,
 so no integrated CPU result is claimed yet.

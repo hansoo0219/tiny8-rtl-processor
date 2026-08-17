@@ -1,8 +1,8 @@
 # Tiny8 Verification Plan
 
-**Status:** In progress. The `alu8` and `instruction_decoder` modules completed
-the required simulation, lint, waveform, and synthesis checks on 2026-08-17.
-All remaining module and integration checks are still planned.
+**Status:** In progress. The `alu8`, `instruction_decoder`, and `data_ram`
+modules completed the required simulation, lint, waveform, and synthesis checks
+on 2026-08-17. All remaining module and integration checks are still planned.
 
 ## 1. Required quality gates
 

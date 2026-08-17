@@ -80,3 +80,36 @@ execution result is claimed yet.
 
 Implement and verify the 16 x 8-bit Data RAM with combinational read and
 synchronous write behavior.
+
+## 2026-08-17 — Data RAM
+
+### Completed
+
+- Implemented `rtl/data_ram.v` as a 16 x 8-bit memory with combinational read
+  and rising-edge synchronous write behavior.
+- Kept the RAM free of reset and initialization logic as required by the
+  architecture.
+- Added `tb/data_ram_tb.v` with checks for all addresses, write timing, disabled
+  writes, and address independence.
+
+### Verified results
+
+- Icarus Verilog compiled the RAM and testbench without warnings.
+- Self-checking simulation passed 4 test groups and 52 individual cases.
+- The VCD waveform confirmed unknown values before first write, immediate
+  asynchronous reads, and data changes only after enabled rising edges.
+- Verilator lint completed without warnings.
+- Yosys synthesized the RAM and reported zero check problems. Generic synthesis
+  expanded the asynchronous-read memory into 128 enabled flip-flops plus
+  combinational selection logic, with no latch cells.
+
+### Important limitation
+
+The generic Yosys result does not claim inference of a specific FPGA memory
+primitive. The asynchronous-read architecture may map to distributed memory or
+flip-flops depending on the eventual target technology.
+
+### Next step
+
+Implement and verify the 16 x 8-bit Program ROM and its hexadecimal program
+image loading behavior.
