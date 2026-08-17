@@ -155,3 +155,45 @@ technology-specific ROM primitive is not claimed.
 
 Implement and verify the `FETCH`, `EXECUTE`, and `HALT` sequencing in
 `control_unit`.
+
+## 2026-08-17 — Control unit
+
+### Completed
+
+- Added the fixed `FETCH`, `EXECUTE`, `HALT`, and invalid/recovery encodings to
+  `rtl/tiny8_defs.vh`.
+- Implemented `rtl/control_unit.v` with a synchronous state register and
+  combinational next-state and gated-control logic.
+- Reused `instruction_decoder` for opcode decode, then allowed architectural
+  side effects only during `EXECUTE`.
+- Implemented unconditional and zero-conditional PC-load control, stable
+  `HALT`, invalid-state recovery, and reset masking of every write control.
+- Added `tb/control_unit_tb.v` with state, opcode, branch, halt, reset, and
+  invalid-state checks.
+
+### Verified results
+
+- Icarus Verilog compiled the control unit and testbench without warnings.
+- Self-checking RTL simulation passed 7 test groups and 47 checks.
+- Verilator lint completed without warnings.
+- The VCD waveform confirmed `FETCH/EXECUTE` sequencing, reset masking of a
+  pending `STA`, `HLT` entry and stability, reset recovery, and invalid-state
+  recovery.
+- Yosys reported zero check problems and produced two synchronous-reset
+  flip-flops for the 2-bit FSM state, plus combinational control and decoder
+  logic. No latch cells were inferred.
+- The synthesized netlist passed the same 7 groups and 47 checks.
+- ALU, decoder, Data RAM, and Program ROM regression simulations all continued
+  to pass.
+
+### Important limitation
+
+This module emits `out_we` but does not create `out_valid`. The processor core
+will register `out_we` so `out_valid` remains high for the full cycle after an
+`OUT` instruction commits. No complete instruction execution is claimed until
+the datapath is integrated in `tiny8_core`.
+
+### Next step
+
+Implement and verify `tiny8_core`, including the PC, IR, accumulator, flags,
+output register, ALU operand mux, and memory interfaces.

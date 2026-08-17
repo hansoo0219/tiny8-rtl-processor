@@ -30,4 +30,9 @@
 `define OPERAND_SEL_IMMEDIATE 1'b0
 `define OPERAND_SEL_MEMORY    1'b1
 
+`define STATE_FETCH   2'b00
+`define STATE_EXECUTE 2'b01
+`define STATE_HALT    2'b10
+`define STATE_INVALID 2'b11
+
 `endif
