@@ -40,6 +40,7 @@ The complete frozen specification is in:
 - [Instruction set](docs/instruction_set.md)
 - [Verification plan](docs/verification_plan.md)
 - [Decision log](docs/decision_log.md)
+- [AI assistance disclosure](docs/ai_usage.md)
 
 ## Open-source toolchain
 
@@ -76,5 +77,6 @@ the retained GTKWave view. `make clean` removes only `build/`.
 
 ## Project scope statement
 
-This is an independent educational RTL design project. It is not a commercial
-CPU, an ASIC tapeout, or professional semiconductor work.
+This is an AI-assisted independent educational RTL learning project; see the
+[AI assistance disclosure](docs/ai_usage.md). It is not a commercial CPU, an
+ASIC tapeout, or professional semiconductor work.
