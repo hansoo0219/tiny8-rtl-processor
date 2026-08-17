@@ -4,7 +4,8 @@
 `tiny8_system`, completed simulation, lint, waveform, and synthesis checks. The
 real-memory reference 5 + 3 program passed RTL and synthesized-netlist
 simulation, and the eight-image complete-program regression passed with clean
-Verilator lint.
+Verilator lint. The root `Makefile` reproduces the complete RTL simulation,
+lint, synthesis, and integration-waveform flows.
 
 ## 1. Required quality gates
 
@@ -168,3 +169,23 @@ will be saved under `artifacts/synthesis/` and reviewed for:
 - accidental latch cells;
 - undriven or multiply-driven signals;
 - unexpected removal of required logic.
+
+## 8. Reproducible commands
+
+From the repository root under WSL:
+
+```bash
+make test
+make lint
+make synth
+make wave
+make clean
+```
+
+The simulation targets are self-checking and return a non-zero status through
+`$fatal` on failure. Verilator warnings remain fatal. Each Yosys run uses
+`check -assert`. The Makefile permits only ABC's exact, understood
+combinational-network advisory and rejects every other synthesis warning.
+Generated files remain under ignored `build/`; the reviewed reports retained
+under `artifacts/synthesis/` are evidence snapshots rather than disposable
+build output.

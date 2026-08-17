@@ -1,7 +1,7 @@
 # Tiny8 Baseline Specification
 
 **Specification version:** 0.1.0  
-**Status:** Frozen architecture baseline; implementation in progress  
+**Status:** Frozen architecture baseline; implementation and verification complete
 **Architecture name:** Tiny8-RAM
 
 ## 1. Purpose

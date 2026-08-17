@@ -13,7 +13,8 @@ implemented and verified with self-checking simulation, lint, waveform review,
 and logic synthesis. The integrated real ROM/RAM hierarchy executes the
 reference 5 + 3 program, produces `8'h08`, and enters `HALT`. An eight-image
 complete-program regression also passes the planned arithmetic, flag, logic,
-shift, branch, PC wrap-around, output, and halt scenarios.
+shift, branch, PC wrap-around, output, and halt scenarios. The root `Makefile`
+reproduces the complete simulation, lint, synthesis, and waveform flows.
 
 The retained [integration waveform](artifacts/screenshots/tiny8_system_waveform.png)
 shows alternating `FETCH`/`EXECUTE` phases, both `STA` writes, the one-cycle
@@ -40,13 +41,38 @@ The complete frozen specification is in:
 - [Verification plan](docs/verification_plan.md)
 - [Decision log](docs/decision_log.md)
 
-## Planned open-source toolchain
+## Open-source toolchain
 
 - Icarus Verilog for compilation and simulation
 - GTKWave for waveform inspection
 - Verilator for linting
 - Yosys for logic synthesis
 - GNU Make under WSL for repeatable commands
+
+## Reproducing the checks
+
+Install GNU Make once if the WSL image does not already provide it:
+
+```bash
+sudo apt update
+sudo apt install make
+```
+
+Run every command from the repository root under WSL:
+
+```bash
+make test
+make lint
+make synth
+make wave
+make clean
+```
+
+`make test` runs all eight self-checking testbenches. `make lint` checks every
+test hierarchy with Verilator. `make synth` synthesizes each RTL module and
+writes generated netlists, JSON, and logs under the ignored `build/`
+directory. `make wave` regenerates the integrated-system VCD before opening
+the retained GTKWave view. `make clean` removes only `build/`.
 
 ## Project scope statement
 

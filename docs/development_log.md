@@ -321,3 +321,41 @@ regression runner, then retain the required annotated integration waveform.
 The default integrated netlist still embeds `add_5_3.hex`. Alternate program
 images exercise the same processor and memory interfaces in RTL simulation;
 changing the synthesized Program ROM contents requires resynthesis.
+
+## 2026-08-17 — Reproducible build automation
+
+### Completed
+
+- Added the root `Makefile` with `test`, `lint`, `synth`, `wave`, and `clean`
+  targets.
+- Kept all disposable compiler, waveform, netlist, JSON, and synthesis-log
+  output under the ignored `build/` directory.
+- Added explicit test top modules and source closures so unit and integration
+  checks do not depend on implicit elaboration choices.
+- Made each testbench failure propagate through `$fatal`, kept Verilator
+  warnings fatal, and added Yosys `check -assert` plus unexpected-warning
+  detection. The exact ABC combinational-network advisory is allowlisted as
+  an understood tool message; every other synthesis warning fails the target.
+- Preserved the reviewed synthesis reports in `artifacts/synthesis/` instead
+  of overwriting evidence snapshots during every local run.
+
+### Verified results
+
+- GNU Make 4.3 executed all eight self-checking simulations successfully.
+- GNU Make 4.3 executed clean Verilator lint for all eight test hierarchies.
+- GNU Make 4.3 synthesized all seven RTL module tops without unexpected
+  warnings or Yosys check failures. The only allowlisted messages were ABC's
+  expected combinational-network advisories.
+- The waveform target regenerated `build/tiny8_system_tb.vcd`, reran the
+  4-group/80-check integrated system test, and passed the expected VCD and
+  save-file paths to its configurable GTKWave launcher. The retained save
+  configuration was also loaded successfully in GTKWave 4 during integration
+  artifact verification.
+- The clean target is restricted to generated files under `build/`.
+
+### Environment prerequisite
+
+GNU Make 4.3 is installed system-wide as `/usr/bin/make` in the Ubuntu WSL
+image. After installation, the normal `make test lint synth` workflow reran
+successfully. A fresh environment can install the same prerequisite with
+`sudo apt install make`.
